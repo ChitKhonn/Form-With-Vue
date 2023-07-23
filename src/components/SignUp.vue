@@ -12,12 +12,18 @@
         <option value="web designer">Web Designer</option>
       </select>
       <input type="checkbox" v-model="checkbox">
-      <label for="">Accept terms and condition</label>
+      <label for="">Accept terms and condition</label> <br>
+
+      <label for="">Skills</label>
+      <input type="text" @keyup="addSkill" v-model="skill">
+      
 
     </form>
     <p>Email is : {{ email }}</p>
     <p>Password is : {{ password }}</p>
     <p>Roles is : {{ roles }}</p>
+    <p>Skill are : {{ skills }}</p>
+
   </div>
 </template>
 
@@ -28,9 +34,19 @@ export default {
       email: "",
       password:"",
       roles:"web developer",
-      checkbox:false
+      checkbox:false,
+      skills:[],
+      skill:""
     };
   },
+  methods:{
+    addSkill(e){
+       if(e.key === ",") {
+            this.skills.push(this.skill);
+            this.skill=""
+       }
+    }
+  }
 };
 </script>
 
