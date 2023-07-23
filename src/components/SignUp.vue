@@ -1,12 +1,33 @@
 <template>
-  <form action="">
-    <label for="">Email</label>
-    <input type="email" required />
-  </form>
+  <div>
+    <form action="">
+      <label for="">Email</label>
+      <input type="email" required v-model="email" />
+
+      <label for="">Password</label>
+      <input type="password" required v-model="password" />
+
+      <select v-model="roles">
+        <option value="web developer" selected >Web Developer</option>
+        <option value="web designer">Web Designer</option>
+      </select>
+    </form>
+    <p>Email is : {{ email }}</p>
+    <p>Password is : {{ password }}</p>
+    <p>Roles is : {{ roles }}</p>
+  </div>
 </template>
 
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      email: "",
+      password:"",
+      roles:""
+    };
+  },
+};
 </script>
 
 <style>
