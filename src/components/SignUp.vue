@@ -8,22 +8,22 @@
       <input type="password" required v-model="password" />
 
       <select v-model="roles">
-        <option value="web developer" >Web Developer</option>
+        <option value="web developer">Web Developer</option>
         <option value="web designer">Web Designer</option>
       </select>
-      <input type="checkbox" v-model="checkbox">
-      <label for="">Accept terms and condition</label> <br>
 
       <label for="">Skills</label>
-      <input type="text" @keyup="addSkill" v-model="skill">
-      
-
+      <input type="text" @keyup.alt="addSkill" v-model="skill" />
+      <div v-for="skill in skills" :key="skill">
+        {{ skill }}
+        <span class="cross" @click="deleteSkill(skill)"> &#10006; </span>
+      </div>
+      <input type="checkbox" v-model="checkbox" />
+      <label for="">Accept terms and condition</label> <br />
     </form>
     <p>Email is : {{ email }}</p>
     <p>Password is : {{ password }}</p>
     <p>Roles is : {{ roles }}</p>
-    <p>Skill are : {{ skills }}</p>
-
   </div>
 </template>
 
@@ -32,21 +32,26 @@ export default {
   data() {
     return {
       email: "",
-      password:"",
-      roles:"web developer",
-      checkbox:false,
-      skills:[],
-      skill:""
+      password: "",
+      roles: "web developer",
+      checkbox: false,
+      skills: [],
+      skill: "",
     };
   },
-  methods:{
-    addSkill(e){
-       if(e.key === ",") {
-            this.skills.push(this.skill);
-            this.skill=""
-       }
-    }
-  }
+  methods: {
+    addSkill(e) {
+      if (e.key === ",") {
+        this.skills.push(this.skill);
+        this.skill = "";
+      }
+    },
+    deleteSkill(skill) {
+      this.skills = this.skills.filter((loopSkills) => {
+        return loopSkills != skill;
+      });
+    },
+  },
 };
 </script>
 
