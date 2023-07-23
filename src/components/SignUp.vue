@@ -1,11 +1,12 @@
 <template>
   <div>
-    <form action="">
+    <form @submit.prevent="submit">
       <label for="">Email</label>
       <input type="email" required v-model="email" />
 
       <label for="">Password</label>
       <input type="password" required v-model="password" />
+        <p v-if="errorMsg" class="error"> {{ errorMsg }} </p>
 
       <select v-model="roles">
         <option value="web developer">Web Developer</option>
@@ -20,6 +21,10 @@
       </div>
       <input type="checkbox" v-model="checkbox" />
       <label for="">Accept terms and condition</label> <br />
+
+      <div class="align">
+        <button class="create">Create Account</button>
+      </div>
     </form>
     <p>Email is : {{ email }}</p>
     <p>Password is : {{ password }}</p>
@@ -34,9 +39,10 @@ export default {
       email: "",
       password: "",
       roles: "web developer",
-      checkbox: false,
+      checkbox: true,
       skills: [],
       skill: "",
+      errorMsg:""
     };
   },
   methods: {
@@ -51,6 +57,11 @@ export default {
         return loopSkills != skill;
       });
     },
+    submit(){
+        if(this.password.length < 8){
+            this.errorMsg="Password must be at least 8 characters"
+        }
+    }
   },
 };
 </script>
